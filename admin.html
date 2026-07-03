@@ -4,22 +4,132 @@
 <head>
        <meta charset="UTF-8">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Administrador</title>
+       <title>Administrador | Eventix</title>
 
        <link rel="stylesheet" href="css/styles.css">
-       <link rel="stylesheet" href="css/responsive.css">
+
 </head>
 
 <body>
+
+       <header>
+
+              <h1>🎫 Panel de Administración</h1>
+              <p>Gestiona los conciertos de Eventix</p>
+
+       </header>
+
        <main>
+
+              <!-- DASHBOARD -->
+
+              <section id="dashboard">
+
+                     <div class="card-dashboard">
+
+                            <h3>Total Eventos</h3>
+
+                            <span id="totalEventos">0</span>
+
+                     </div>
+
+                     <div class="card-dashboard">
+
+                            <h3>Publicados</h3>
+
+                            <span id="eventosPublicados">0</span>
+
+                     </div>
+
+                     <div class="card-dashboard">
+
+                            <h3>Vendidos</h3>
+
+                            <span id="eventosVendidos">0</span>
+
+                     </div>
+
+              </section>
+
+              <!-- FORMULARIO -->
+
+              <section id="formulario">
+
+                     <h2>Registrar Concierto</h2>
+
+                     <input type="text" id="nombreEvento" placeholder="Nombre del concierto">
+
+                     <input type="text" id="artistaEvento" placeholder="Artista">
+
+                     <input type="date" id="fechaEvento">
+
+                     <select id="ciudadEvento">
+
+                            <option value="">
+                                   Seleccione una ciudad
+                            </option>
+
+                     </select>
+
+                     <select id="categoriaEvento">
+
+                            <option value="">Categoría</option>
+                            <option>Pop</option>
+                            <option>Rock</option>
+                            <option>K-Pop</option>
+                            <option>Reggaetón</option>
+                            <option>Electrónica</option>
+
+                     </select>
+
+                     <input type="number" id="precioEvento" placeholder="Precio">
+
+                     <input
+                     type="file"
+                     id="imagenEvento"
+                     accept="image/*">
+                     <button id="btnGuardarEvento">
+
+                            Guardar Evento
+
+                     </button>
+
+                     <button id="btnActualizarEvento">
+
+                            Actualizar Evento
+
+                     </button>
+
+                     <button id="btnCancelarEdicion">
+
+                            Cancelar
+
+                     </button>
+
+              </section>
+
+              <!-- LISTA -->
+
+              <section id="eventos">
+
+                     <div class="encabezado">
+
+                            <h2>Eventos Registrados</h2>
+
+                            <input id="buscarEvento" type="text" placeholder="Buscar evento">
+
+                     </div>
+
+                     <div id="listaEventos">
+
+                     </div>
+
+              </section>
 
        </main>
 
-       <script src="js/admin.js"></script>
-       <script src="js/eventos.js"></script>
        <script src="js/main.js"></script>
-
-
+       <script src="js/admin.js"></script>
 </body>
 
 </html>

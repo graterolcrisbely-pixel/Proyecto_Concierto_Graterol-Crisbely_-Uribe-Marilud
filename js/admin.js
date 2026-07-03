@@ -41,406 +41,180 @@ if (botonIngresar) {
 
 //////////////////EVENTOS DE ADMINISTRADOR//////////////
 
-const panel = document.getElementById("panelAdmin");
+//==================================================
+// VARIABLES GLOBALES
+//==================================================
 
-if (panel) {
+// Formulario
+const nombreEvento = document.querySelector("#nombreEvento");
+const artistaEvento = document.querySelector("#artistaEvento");
+const fechaEvento = document.querySelector("#fechaEvento");
+const ciudadEvento = document.querySelector("#ciudadEvento");
+const categoriaEvento = document.querySelector("#categoriaEvento");
+const precioEvento = document.querySelector("#precioEvento");
+const imagenEvento = document.querySelector("#imagenEvento");
 
-    
+// Botones
+const btnGuardarEvento = document.querySelector("#btnGuardarEvento");
+const btnActualizarEvento = document.querySelector("#btnActualizarEvento");
+const btnCancelarEdicion = document.querySelector("#btnCancelarEdicion");
 
-    cargarCiudades();
-    cargarGeneros();
-    mostrarEventosAdmin();
-}
+// Dashboard
+const totalEventos = document.querySelector("#totalEventos");
+const eventosPublicados = document.querySelector("#eventosPublicados");
+const eventosVendidos = document.querySelector("#eventosVendidos");
+
+// Lista
+const listaEventos = document.querySelector("#listaEventos");
+const buscarEvento = document.querySelector("#buscarEvento");
+
+// Arreglo donde estarán todos los eventos
+let eventos = JSON.parse(localStorage.getItem("eventos")) || [];
+
+// Variables para editar
+let editando = false;
+let idEditar = null;
+
+
+//==================================================
+// CARGAR CIUDADES DESDE LA API
+//==================================================
 
 async function cargarCiudades() {
 
+    const url = "https://api-colombia.com/api/v1/Department";
+
     try {
 
-        const respuesta =
-            await fetch(
-                "https://api-colombia.com/api/v1/Department"
-            );
+        const respuesta = await fetch(url);
+        const ciudades = await respuesta.json();
 
-        const ciudades =
-            await respuesta.json();
+        ciudadEvento.innerHTML = "";
 
-        const select =
-            document.getElementById("ciudad");
+        const opcionInicial = document.createElement("option");
+        opcionInicial.textContent = "Seleccione una ciudad";
+        opcionInicial.value = "";
 
-        ciudades.forEach((ciudad) => {
+        ciudadEvento.append(opcionInicial);
 
-            select.innerHTML += `
+        ciudades.forEach(ciudad => {
 
-                <option value="${ciudad.name}">
-                    ${ciudad.name}
-                </option>
+            const opcion = document.createElement("option");
 
-            `;
+            opcion.value = ciudad.name;
+            opcion.textContent = ciudad.name;
+
+            ciudadEvento.append(opcion);
 
         });
 
-    }
-    catch {
+    } catch (error) {
 
-        alert(
-            "No se pudieron cargar las ciudades"
-        );
+        console.log("Error al cargar ciudades", error);
 
     }
 
 }
 
-function cargarGeneros() {
 
-    const generos = [
+//==================================================
+// INICIAR LA PÁGINA
+//==================================================
 
-        "POP",
-        "ROCK",
-        "K-POP",
-        "JAZZ",
-        "INDIE POP",
-        "ELECTRÓNICA",
-        "FOLK",
-        "CONTEMPORÁNEO"
+document.addEventListener("DOMContentLoaded", () => {
 
-    ];
+    cargarCiudades();
 
-    const select =
-        document.getElementById("genero");
+    pintarEventos();
 
-    generos.forEach((genero) => {
+    actualizarDashboard();
 
-        select.innerHTML += `
+});
 
-            <option value="${genero}">
-                ${genero}
-            </option>
 
-        `;
+//==================================================
+// GUARDAR EVENTO
+//==================================================
 
-    });
+btnGuardarEvento.addEventListener("click", guardarEvento);
 
-}
+function guardarEvento() {
 
-let indiceEditar = -1;
-
-document.addEventListener(
-    "click",
-    function (e) {
-
-        if (
-            e.target.id !== "guardar"
-        ) {
-            return;
-        }
-
-        const nombre =
-            document.getElementById(
-                "nombre"
-            ).value;
-
-        const genero =
-            document.getElementById(
-                "genero"
-            ).value;
-
-        const ciudad =
-            document.getElementById(
-                "ciudad"
-            ).value;
-
-        const hora =
-            document.getElementById(
-                "hora"
-            ).value;
-
-        const precio =
-            document.getElementById(
-                "precio"
-            ).value;
-
-        const archivo =
-            document.getElementById(
-                "imagen"
-            ).files[0];
-
-        if (
-            nombre === "" ||
-            genero === "" ||
-            ciudad === "" ||
-            hora === "" ||
-            precio === ""
-        ) {
-            alert(
-                "Complete todos los campos"
-            );
-
-            return;
-        }
-
-        if (
-            indiceEditar === -1 &&
-            !archivo
-        ) {
-            alert(
-                "Seleccione una imagen"
-            );
-
-            return;
-        }
-
-        if (archivo) {
-
-            const lector =
-                new FileReader();
-
-            lector.onload =
-                function () {
-
-                    guardarEvento(
-                        lector.result
-                    );
-
-                };
-
-            lector.readAsDataURL(
-                archivo
-            );
-        }
-        else {
-
-            guardarEvento(
-                eventos[indiceEditar]
-                    .imagen
-            );
-
-        }
-
-    }
-);
-
-function guardarEvento(imagen) {
-
-    const nuevoEvento = {
-
-        nombre:
-            document.getElementById(
-                "nombre"
-            ).value,
-
-        genero:
-            document.getElementById(
-                "genero"
-            ).value,
-
-        ciudad:
-            document.getElementById(
-                "ciudad"
-            ).value,
-
-        hora:
-            document.getElementById(
-                "hora"
-            ).value,
-
-        precio:
-            document.getElementById(
-                "precio"
-            ).value,
-
-        imagen:
-            imagen
-    };
-
+    // Validar campos
     if (
-        indiceEditar === -1
+        nombreEvento.value.trim() === "" ||
+        artistaEvento.value.trim() === "" ||
+        fechaEvento.value === "" ||
+        ciudadEvento.value === "" ||
+        categoriaEvento.value === "" ||
+        precioEvento.value === "" ||
+        imagenEvento.value.trim() === ""
     ) {
-
-        eventos.push(
-            nuevoEvento
-        );
-
-    }
-    else {
-
-        eventos[indiceEditar] =
-            nuevoEvento;
-
-        indiceEditar = -1;
-
-        document.getElementById(
-            "guardar"
-        ).textContent =
-            "Crear Evento";
-    }
-
-    localStorage.setItem(
-        "eventos",
-        JSON.stringify(
-            eventos
-        )
-    );
-
-    mostrarEventosAdmin();
-    mostrarEventosCliente();
-
-    limpiarFormulario();
-}
-
-function limpiarFormulario() {
-
-    document.getElementById(
-        "nombre"
-    ).value = "";
-
-    document.getElementById(
-        "genero"
-    ).value = "";
-
-    document.getElementById(
-        "ciudad"
-    ).value = "";
-
-    document.getElementById(
-        "hora"
-    ).value = "";
-
-    document.getElementById(
-        "precio"
-    ).value = "";
-
-    document.getElementById(
-        "imagen"
-    ).value = "";
-
-}
-
-
-function mostrarEventosAdmin() {
-
-    const lista =
-        document.querySelector(
-            ".lista-admin"
-        );
-
-    if (!lista) {
+        alert("Completa todos los campos.");
         return;
     }
 
-    lista.innerHTML = "";
+    // Crear objeto del evento
+    const nuevoEvento = {
 
-    eventos.forEach(
-        (evento, i) => {
+        id: Date.now(),
 
-            lista.innerHTML += `
+        nombre: nombreEvento.value,
 
-                <div class="card-admin">
+        artista: artistaEvento.value,
 
-                    <img
-                        src="${evento.imagen}"
-                        width="180"
-                    >
+        fecha: fechaEvento.value,
 
-                    <h3>
-                        ${evento.nombre}
-                    </h3>
+        ciudad: ciudadEvento.value,
 
-                    <p>
-                        ${evento.genero}
-                    </p>
+        categoria: categoriaEvento.value,
 
-                    <p>
-                        ${evento.ciudad}
-                    </p>
+        precio: Number(precioEvento.value),
 
-                    <p>
-                        ${evento.hora}
-                    </p>
+        imagen: imagenEvento.value,
 
-                    <p>
-                        $${evento.precio}
-                    </p>
+        vendido: false,
 
-                    <button
-                        onclick="
-                        editarEvento(${i})
-                        "
-                    >
-                        Editar
-                    </button>
+        publicado: false
 
-                    <button
-                        onclick="
-                        eliminarEvento(${i})
-                        "
-                    >
-                        Eliminar
-                    </button>
+    };
 
-                </div>
+    // Agregar al arreglo
+    eventos.push(nuevoEvento);
 
-            `;
-        }
+    // Guardar en LocalStorage
+    localStorage.setItem(
+        "eventos",
+        JSON.stringify(eventos)
     );
-}
 
-function editarEvento(i) {
+    // Limpiar formulario
+    limpiarFormulario();
 
-    const evento =
-        eventos[i];
-
-    document.getElementById(
-        "nombre"
-    ).value =
-        evento.nombre;
-
-    document.getElementById(
-        "genero"
-    ).value =
-        evento.genero;
-
-    document.getElementById(
-        "ciudad"
-    ).value =
-        evento.ciudad;
-
-    document.getElementById(
-        "hora"
-    ).value =
-        evento.hora;
-
-    document.getElementById(
-        "precio"
-    ).value =
-        evento.precio;
-
-    indiceEditar = i;
-
-    document.getElementById(
-        "guardar"
-    ).textContent =
-        "Actualizar Evento";
-}
-
-function eliminarEvento(i) {
-
-    if (
-        confirm(
-            "¿Desea eliminar este concierto?"
-        )
-    ) {
-
-        eventos.splice(i, 1);
-
-        localStorage.setItem(
-            "eventos",
-            JSON.stringify(
-                eventos
-            )
-        );
-
-        mostrarEventosAdmin();
-        mostrarEventosCliente();
-    }
+    // Actualizar vista
+    pintarEventos();
+    actualizarDashboard();
 
 }
+
+//==================================================
+// LIMPIAR FORMULARIO
+//==================================================
+
+function limpiarFormulario() {
+
+    nombreEvento.value = "";
+    artistaEvento.value = "";
+    fechaEvento.value = "";
+    ciudadEvento.selectedIndex = 0;
+    categoriaEvento.selectedIndex = 0;
+    precioEvento.value = "";
+    imagenEvento.value = "";
+
+}
+
+const archivo =
+document.querySelector("#imagenEvento");
+
+const imagen =
+archivo.files[0];

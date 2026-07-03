@@ -52,3 +52,30 @@
                 height: 180px;
         }
 }
+
+
+@media(max-width:768px){
+
+        body{
+    
+            padding:20px;
+    
+        }
+    
+        .encabezado{
+    
+            flex-direction:column;
+    
+            gap:20px;
+    
+        }
+    
+        #buscarEvento{
+    
+            width:100%;
+    
+        }
+    
+    }
+    
+    

@@ -5,388 +5,466 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /*=========================
-        GENERALES
+    ESTILOS GENERALES
 =========================*/
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #f5f7fb;
-    color: #1f2937;
-    line-height: 1.6;
-}
+body{
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+    font-family:"Poppins",sans-serif;
 
-img {
-    display: block;
-    width: 100%;
+    background:linear-gradient(135deg,#eef2ff,#e9ddff,#ffe6fa);
+
+    min-height:100vh;
+
+    padding:40px;
+
+    color:#2d2d2d;
+
 }
 
 /*=========================
-          NAVBAR
+        HEADER
 =========================*/
 
-header {
-    background: #ffffff;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
 }
 
-.navbar {
-    width: 90%;
-    max-width: 1300px;
-    margin: auto;
-    min-height: 80px;
+header h1{
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    font-size:48px;
+
+    color:#5b2cff;
+
+    text-shadow:0 4px 12px rgba(91,44,255,.25);
+
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+header p{
 
-.logo i {
-    font-size: 2rem;
-    color: #8b5cf6;
-}
+    color:#6d6d6d;
 
-.logo h2 {
-    color: #111827;
-    font-size: 1.8rem;
-}
+    margin-top:10px;
 
-.menu {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
+    font-size:18px;
 
-.menu li a {
-    font-weight: 500;
-    transition: .3s;
-}
-
-.menu li a:hover {
-    color: #8b5cf6;
-}
-
-.acciones {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.acciones input {
-    padding: 12px 18px;
-    border: none;
-    background: #f3f4f6;
-    border-radius: 30px;
-    outline: none;
-    width: 220px;
-}
-
-.acciones i {
-    font-size: 1.5rem;
-    color: #8b5cf6;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.acciones i:hover {
-    transform: scale(1.15);
 }
 
 /*=========================
-        PROMOCIONES
+      DASHBOARD
 =========================*/
 
-.promociones {
-    width: 90%;
-    max-width: 1300px;
-    margin: 40px auto;
+#dashboard{
 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
+    display:flex;
+
+    justify-content:center;
+
+    gap:25px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:45px;
+
 }
 
-.promo {
-    color: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 12px 20px rgba(0,0,0,.08);
-    transition: .4s;
+.card-dashboard{
+
+    width:240px;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:linear-gradient(135deg,#5b2cff,#8f3fff,#d633ff);
+
+    color:white;
+
+    text-align:center;
+
+    box-shadow:0 15px 30px rgba(91,44,255,.25);
+
+    transition:.3s;
+
 }
 
-.promo:hover {
-    transform: translateY(-10px);
+.card-dashboard:hover{
+
+    transform:translateY(-8px);
+
 }
 
-.promo h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+.card-dashboard h3{
+
+    font-size:18px;
+
+    margin-bottom:15px;
+
 }
 
-.morado {
-    background: linear-gradient(135deg,#8b5cf6,#6d28d9);
-}
+.card-dashboard span{
 
-.azul {
-    background: linear-gradient(135deg,#3b82f6,#2563eb);
-}
+    font-size:40px;
 
-.naranja {
-    background: linear-gradient(135deg,#f97316,#ea580c);
+    font-weight:bold;
+
 }
 
 /*=========================
-            HERO
+      FORMULARIO
 =========================*/
 
-.hero {
-    width: 90%;
-    max-width: 1300px;
-    margin: auto;
-    margin-bottom: 60px;
+#formulario{
 
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
+    max-width:900px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 18px 35px rgba(91,44,255,.12);
+
 }
 
-.hero-imagen {
-    position: relative;
-    overflow: hidden;
-    border-radius: 25px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+#formulario h2{
+
+    text-align:center;
+
+    color:#5b2cff;
+
+    margin-bottom:30px;
+
+    font-size:32px;
+
 }
 
-.hero-imagen img {
-    height: 500px;
-    object-fit: cover;
+#formulario input,
+#formulario select{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:18px;
+
+    border:2px solid #d7c6ff;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    transition:.3s;
+
 }
 
-.hero-info {
-    position: absolute;
-    bottom: 40px;
-    left: 40px;
-    color: white;
-}
+#formulario input:focus,
+#formulario select:focus{
 
-.hero-info span {
-    background: rgba(255,255,255,.2);
-    backdrop-filter: blur(10px);
-    padding: 8px 18px;
-    border-radius: 20px;
-}
+    border-color:#8f3fff;
 
-.hero-info h1 {
-    font-size: 4rem;
-    margin: 20px 0 10px;
-}
+    box-shadow:0 0 12px rgba(143,63,255,.3);
 
-.hero-info p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
+    outline:none;
 
-.hero-info button {
-    border: none;
-    background: #8b5cf6;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 12px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.hero-info button:hover {
-    background: #6d28d9;
-    transform: scale(1.05);
 }
 
 /*=========================
-      EVENTOS LATERALES
+        BOTONES
 =========================*/
 
-.eventos-laterales {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    margin-top:12px;
+
+    transition:.3s;
+
 }
 
-.mini-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    gap: 20px;
-    padding: 15px;
-    align-items: center;
-    box-shadow: 0 10px 20px rgba(0,0,0,.08);
-    transition: .4s;
+#btnGuardarEvento{
+
+    background:linear-gradient(135deg,#2962ff,#5b2cff);
+
 }
 
-.mini-card:hover {
-    transform: translateX(10px);
+#btnGuardarEvento:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 20px rgba(41,98,255,.3);
+
 }
 
-.mini-card img {
-    width: 110px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 15px;
+#btnActualizarEvento{
+
+    background:linear-gradient(135deg,#8f3fff,#d633ff);
+
 }
 
-.mini-card h4 {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+#btnActualizarEvento:hover{
+
+    transform:translateY(-3px);
+
 }
 
-.mini-card p {
-    color: #6b7280;
-    margin-bottom: 8px;
+#btnCancelarEdicion{
+
+    background:linear-gradient(135deg,#ff4fa3,#d633ff);
+
 }
 
-.mini-card strong {
-    color: #8b5cf6;
+#btnCancelarEdicion:hover{
+
+    transform:translateY(-3px);
+
 }
 
 /*=========================
-      PROXIMOS EVENTOS
+      EVENTOS
 =========================*/
 
-.proximos {
-    width: 90%;
-    max-width: 1300px;
-    margin: 80px auto;
+#eventos{
+
+    max-width:1200px;
+
+    margin:50px auto;
+
 }
 
-.titulo {
-    text-align: center;
-    margin-bottom: 40px;
+.encabezado{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
 }
 
-.titulo h2 {
-    font-size: 2.5rem;
-    color: #111827;
+.encabezado h2{
+
+    color:#5b2cff;
+
+    font-size:32px;
+
+}
+
+#buscarEvento{
+
+    width:300px;
+
+    padding:14px;
+
+    border:2px solid #d7c6ff;
+
+    border-radius:14px;
+
 }
 
 /*=========================
-      FORMULARIO EVENTOS
+      TARJETAS
 =========================*/
 
-.form-evento {
-    background: white;
-    padding: 30px;
-    border-radius: 25px;
-    box-shadow: 0 12px 25px rgba(0,0,0,.08);
+#listaEventos{
 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    display:grid;
 
-    margin-bottom: 50px;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
 }
 
-.form-evento input {
-    padding: 15px;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    outline: none;
-    font-size: 1rem;
-    transition: .3s;
+.cardEvento{
+
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 30px rgba(91,44,255,.12);
+
+    transition:.35s;
+
 }
 
-.form-evento input:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 10px rgba(139,92,246,.2);
+.cardEvento:hover{
+
+    transform:translateY(-8px);
+
 }
 
-.form-evento button {
-    border: none;
-    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-    color: white;
-    padding: 15px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: .3s;
+.cardEvento img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
 }
 
-.form-evento button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(139,92,246,.3);
+.cardContenido{
+
+    padding:22px;
+
+}
+
+.cardContenido h3{
+
+    color:#5b2cff;
+
+    margin-bottom:12px;
+
+    font-size:24px;
+
+}
+
+.cardContenido p{
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+.estado{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    margin-top:15px;
+
+    font-weight:bold;
+
+}
+
+.disponible{
+
+    background:#d8f7e7;
+
+    color:#008d4c;
+
+}
+
+.vendido{
+
+    background:#ffe2f3;
+
+    color:#c2185b;
+
 }
 
 /*=========================
-      CONTENEDOR CARDS
+    BOTONES TARJETA
 =========================*/
 
-.contenedor-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+.botonesCard{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
 }
 
+.botonesCard button{
 
+    flex:1;
 
+    padding:12px;
 
+    font-size:14px;
 
+}
+
+.btnEditar{
+
+    background:#2962ff;
+
+}
+
+.btnEliminar{
+
+    background:#ff4fa3;
+
+}
+
+.btnPublicar{
+
+    background:#8f3fff;
+
+}
 
 /*=========================
-          FOOTER
+      RESPONSIVE
 =========================*/
 
-footer {
-    background: #111827;
-    color: white;
-    margin-top: 80px;
-    padding: 60px 10%;
+@media(max-width:768px){
 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    gap: 40px;
+    body{
+
+        padding:20px;
+
+    }
+
+    #dashboard{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .encabezado{
+
+        flex-direction:column;
+
+        gap:20px;
+
+    }
+
+    #buscarEvento{
+
+        width:100%;
+
+    }
+
 }
-
-.footer-logo h2 {
-    margin-bottom: 15px;
-}
-
-footer h3 {
-    margin-bottom: 20px;
-}
-
-footer a {
-    display: block;
-    margin-bottom: 12px;
-    color: #d1d5db;
-    transition: .3s;
-}
-
-footer a:hover {
-    color: #8b5cf6;
-    padding-left: 8px;
-}
-
-
-
-
+✨ Quedará con una pa
