@@ -1,258 +1,166 @@
-async function cargarEventos() {
+//=====================================================
+// VARIABLES
+//=====================================================
 
-    const respuesta =
-        await fetch("Conciertos.json");
+const contenedorEventos =
+document.querySelector(".contenedor-cards");
 
-    const eventos =
-        await respuesta.json();
+const buscador =
+document.getElementById("buscar");
 
-    console.log(eventos);
+const filtroCiudad =
+document.getElementById("filtroCiudad");
+
+const filtroCategoria =
+document.getElementById("filtroCategoria");
+
+
+
+//=====================================================
+// OBTENER EVENTOS
+//=====================================================
+
+function obtenerEventos(){
+
+    return JSON.parse(
+
+        localStorage.getItem("eventos")
+
+    ) || [];
+
 }
 
-cargarEventos();
+//=====================================================
+// MOSTRAR EVENTOS
+//=====================================================
 
+function mostrarEventos() {
 
+    if (!contenedorEventos) return;
 
-async function cargarEventosIniciales() {
+    const eventos = obtenerEventos();
 
-    let eventos =
-        JSON.parse(
-            localStorage.getItem("eventos")
-        );
+    contenedorEventos.innerHTML = "";
 
-    // Si ya existen eventos, no vuelve a cargarlos
-    if (eventos) {
-        mostrarEventosCliente();
-        return;
-    }
+    eventos
+    .filter(evento => evento.publicado)
+    .forEach(evento => {
 
-    try {
+        contenedorEventos.innerHTML += `
 
-        const respuesta =
-            await fetch(
-                "Conciertos.json"
-            );
+        <div class="card">
 
-        const datos =
-            await respuesta.json();
+            <img
+                src="${evento.imagen}"
+                alt="${evento.nombre}"
+            >
 
-        localStorage.setItem(
-            "eventos",
-            JSON.stringify(datos)
-        );
+            <div class="contenido">
 
-        mostrarEventosCliente();
+                <span>${evento.categoria}</span>
 
-    } catch (error) {
+                <h3>${evento.nombre}</h3>
 
-        console.log(
-            "Error al cargar el JSON",
-            error
-        );
+                <p>📍 ${evento.ciudad}</p>
 
-    }
-}
+                <p>📅 ${evento.fecha}</p>
 
+                <p>🕒 ${evento.hora}</p>
 
-function mostrarEventosCliente() {
+                <h4>$${evento.precio}</h4>
 
-    const contenedor =
-        document.querySelector(
-            ".contenedor-cards"
-        );
-
-    if (!contenedor) {
-        return;
-    }
-
-    const eventos =
-        JSON.parse(
-            localStorage.getItem(
-                "eventos"
-            )
-        ) || [];
-
-    contenedor.innerHTML = "";
-
-    eventos.forEach((evento) => {
-
-        contenedor.innerHTML += `
-
-            <div class="card">
-
-                <img
-                    src="${evento.imagen}"
-                    alt="${evento.nombre}"
-                >
-
-                <div class="contenido">
-
-                    <span>
-                        ${evento.categoria}
-                    </span>
-
-                    <h3>
-                        ${evento.nombre}
-                    </h3>
-
-                    <p>
-                        📍 ${evento.ciudad}
-                    </p>
-
-                    <h4>
-                        $${evento.precio}
-                    </h4>
-
-                    <button>
-                        Comprar
-                    </button>
-
-                </div>
+                <button
+                    class="agregarCarrito"
+                    data-id="${evento.id}">
+                    Comprar
+                </button>
 
             </div>
 
+        </div>
+
         `;
+
     });
 
 }
 
-cargarEventosIniciales();
-////////PANEL LOGIN//////////
+//=====================================================
+// EVENTOS DE LOS BOTONES
+//=====================================================
 
-const panelAdmin =
-    document.getElementById("panelAdmin");
+document.addEventListener("click", (e) => {
 
-if (panelAdmin) {
+    if(e.target.classList.contains("agregarCarrito")){
 
-    panelAdmin.innerHTML = `
+        agregarAlCarrito(
+            Number(e.target.dataset.id)
+        );
 
-        <h1>Administrador de Eventos</h1>
-
-        <div class="form-evento">
-
-            <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre">
-
-            <input
-                type="text"
-                id="genero"
-                placeholder="Género">
-
-            <input
-                type="text"
-                id="ciudad"
-                placeholder="Ciudad">
-
-            <input
-                type="text"
-                id="hora"
-                placeholder="Hora">
-
-            <input
-                type="number"
-                id="precio"
-                placeholder="Precio">
-
-            <input
-                type="text"
-                id="imagen"
-                placeholder="Ruta de imagen">
-
-            <button id="guardar">
-                Crear Evento
-            </button>
-
-        </div>
-
-        <h2>Lista de Eventos</h2>
-
-        <div class="lista-admin">
-
-        </div>
-
-    `;
-
-    mostrarEventosAdmin();
-}
-
-
-
-
-/////////////////////Eventos////////////////
-
-const contenedor =
-    document.querySelector(
-        ".contenedor-cards"
-    );
-
-function mostrarEventosCliente() {
-
-    if (!contenedor) {
-        return;
     }
 
-    const eventos =
-        JSON.parse(
-            localStorage.getItem(
-                "eventos"
-            )
-        ) || [];
+});
 
-    contenedor.innerHTML = "";
 
-    eventos.forEach(
-        (evento) => {
 
-            contenedor.innerHTML += `
+//=====================================================
+// CARGAR EVENTOS DESDE JSON
+//=====================================================
 
-            <div class="card">
+async function cargarEventosJSON(){
 
-                <img
-                    src="${evento.imagen}"
-                    alt="${evento.nombre}"
-                >
+    try{
 
-                <div class="contenido">
+        const respuesta = await fetch(
 
-                    <span>
-                        ${evento.categoria}
-                    </span>
+            "Data/Conciertos.json"
 
-                    <h3>
-                        ${evento.nombre}
-                    </h3>
+        );
 
-                    <p>
-                        🎤 ${evento.artista}
-                    </p>
+        const eventos = await respuesta.json();
 
-                    <p>
-                        📍 ${evento.ciudad}
-                    </p>
+        localStorage.setItem(
 
-                    <p>
-                        📅 ${evento.fecha}
-                    </p>
+            "eventos",
 
-                    <h4>
-                        $${evento.precio}
-                    </h4>
+            JSON.stringify(eventos)
 
-                    <button>
-                        Comprar
-                    </button>
+        );
 
-                </div>
+        mostrarEventos();
 
-            </div>
+    }
 
-        `;
+    catch(error){
 
-        }
-    );
+        console.error(
+
+            "Error cargando conciertos:",
+
+            error
+
+        );
+
+    }
 
 }
 
-mostrarEventosCliente();
+//=====================================================
+// INICIALIZACIÓN
+//=====================================================
+
+if(obtenerEventos().length === 0){
+
+    cargarEventosJSON();
+
+}else{
+
+    mostrarEventos();
+
+}
+
+if(typeof actualizarContador === "function"){
+
+    actualizarContador();
+
+}

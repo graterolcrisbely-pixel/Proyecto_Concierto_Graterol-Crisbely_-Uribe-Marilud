@@ -1,5 +1,6 @@
+//=====================================================
 // NAVBAR
-/////////////////////////
+//=====================================================
 
 const navbar = document.getElementById("navbar");
 
@@ -37,27 +38,29 @@ if (navbar) {
 
             <div class="acciones">
 
-                <input
-                    type="text"
-                    id="buscar"
-                    placeholder="Buscar artista..."
-                >
+                <button id="abrirCarrito" class="btnCarrito">
+
+                    🛒
+
+                    <span id="contadorCarrito">
+                        0
+                    </span>
+
+                </button>
 
             </div>
 
         </nav>
 
     `;
+
 }
 
-/////////////////////////
+//=====================================================
 // PROMOCIONES
-/////////////////////////
+//=====================================================
 
-const promociones =
-    document.getElementById(
-        "promociones"
-    );
+const promociones = document.getElementById("promociones");
 
 if (promociones) {
 
@@ -95,19 +98,15 @@ if (promociones) {
 
     `;
 
-    promociones.classList.add(
-        "promociones"
-    );
+    promociones.classList.add("promociones");
+
 }
 
-/////////////////////////
+//=====================================================
 // HERO
-/////////////////////////
+//=====================================================
 
-const hero =
-    document.getElementById(
-        "hero"
-    );
+const hero = document.getElementById("hero");
 
 if (hero) {
 
@@ -116,7 +115,7 @@ if (hero) {
         <div class="hero-imagen">
 
             <img
-                src="img/Img-Conciertos/concierto imagen.jpg"
+                src="img/Img-Conciertos/BTS.png"
             >
 
             <div class="hero-info">
@@ -130,11 +129,11 @@ if (hero) {
                 </h1>
 
                 <p>
-                    Teatro Metropolitano
+                    Estadio El Campin
                 </p>
 
                 <button>
-                    Comprar - $850
+                    Comprar - $850.000
                 </button>
 
             </div>
@@ -146,21 +145,21 @@ if (hero) {
             <div class="mini-card">
 
                 <img
-                    src="img/marejada.jpg"
+                    src="img/Img-Conciertos/feid.jpeg"
                 >
 
                 <div>
 
                     <h4>
-                        Marejada
+                        FEID
                     </h4>
 
                     <p>
-                        Monterrey
+                        Colombia
                     </p>
 
                     <strong>
-                        $780
+                        $78.000
                     </strong>
 
                 </div>
@@ -170,21 +169,21 @@ if (hero) {
             <div class="mini-card">
 
                 <img
-                    src="img/flor.jpg"
+                    src="img/Img-Conciertos/taylor.jpeg"
                 >
 
                 <div>
 
                     <h4>
-                        Flor de Tierra
+                        Taylor Swift "Eras Tour"
                     </h4>
 
                     <p>
-                        Oaxaca
+                        Bogota
                     </p>
 
                     <strong>
-                        $450
+                        $450.000
                     </strong>
 
                 </div>
@@ -194,21 +193,21 @@ if (hero) {
             <div class="mini-card">
 
                 <img
-                    src="img/cuerdas.jpg"
+                    src="img/Img-Conciertos/chinoynacho.jpg"
                 >
 
                 <div>
 
                     <h4>
-                        Cuerdas del Alma
+                        Chino y Nacho
                     </h4>
 
                     <p>
-                        CDMX
+                        Medellin
                     </p>
 
                     <strong>
-                        $950
+                        $950.000
                     </strong>
 
                 </div>
@@ -219,19 +218,15 @@ if (hero) {
 
     `;
 
-    hero.classList.add(
-        "hero"
-    );
+    hero.classList.add("hero");
+
 }
 
-/////////////////////////
+//=====================================================
 // FOOTER
-/////////////////////////
+//=====================================================
 
-const footer =
-    document.getElementById(
-        "footer"
-    );
+const footer = document.getElementById("footer");
 
 if (footer) {
 
@@ -291,53 +286,5 @@ if (footer) {
         </div>
 
     `;
+
 }
-
-/////////////////////////
-// BUSCADOR
-/////////////////////////
-
-document.addEventListener(
-    "input",
-    function (e) {
-
-        if (
-            e.target.id === "buscar"
-        ) {
-
-            const texto =
-                e.target.value
-                .toLowerCase();
-
-            const cards =
-                document.querySelectorAll(
-                    ".card"
-                );
-
-            cards.forEach((card) => {
-
-                const nombre =
-                    card
-                    .querySelector("h3")
-                    .textContent
-                    .toLowerCase();
-
-                if (
-                    nombre.includes(
-                        texto
-                    )
-                ) {
-                    card.style.display =
-                        "block";
-                }
-                else {
-                    card.style.display =
-                        "none";
-                }
-
-            });
-
-        }
-
-    }
-);
