@@ -105,3 +105,126 @@
                 flex-direction: column;
         }
 }
+
+
+/* =======================
+      RESPONSIVE EVENTOS
+======================= */
+
+@media (max-width: 1200px) {
+
+        #listaEventos {
+
+                grid-template-columns: repeat(2, 1fr);
+
+        }
+
+}
+
+@media (max-width:900px) {
+
+        #dashboard {
+
+                grid-template-columns: 1fr;
+
+        }
+
+        #listaEventos {
+
+                grid-template-columns: 1fr;
+
+        }
+
+        .card-evento {
+
+                max-width: 450px;
+                margin: auto;
+
+        }
+
+}
+
+@media (max-width:700px) {
+
+        #formulario {
+
+                padding: 20px;
+
+        }
+
+        #formulario input,
+        #formulario select,
+        #formulario button {
+
+                width: 100%;
+
+        }
+
+        .card-evento img {
+
+                height: 220px;
+
+        }
+
+}
+
+@media (max-width:500px) {
+
+        #listaEventos {
+
+                grid-template-columns: 1fr;
+
+        }
+
+        .card-evento {
+
+                width: 100%;
+
+        }
+
+        .card-evento img {
+
+                height: 180px;
+
+        }
+
+        .acciones-card {
+
+                flex-direction: column;
+
+        }
+
+        .btn-editar,
+        .btn-eliminar {
+
+                width: 100%;
+
+        }
+
+}
+
+#listaEventos {
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+
+}
+
+.card-evento {
+
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
+
+}
+
+.card-evento img {
+
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+
+}
